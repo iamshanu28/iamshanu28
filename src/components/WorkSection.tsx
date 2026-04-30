@@ -25,33 +25,12 @@ export function WorkSection() {
         </div>
       </div>
 
-      <div
+      <h2
         aria-hidden="true"
-        className="mt-[85px] flex justify-end pr-[83px]"
+        className="mt-[85px] select-none whitespace-nowrap pr-[83px] text-right text-[128px] font-extrabold leading-none tracking-tight text-black/[0.08]"
       >
-        <svg
-          viewBox="0 0 980 140"
-          preserveAspectRatio="xMaxYMid meet"
-          className="block h-auto w-full max-w-[1100px]"
-        >
-          <text
-            x="100%"
-            y="115"
-            textAnchor="end"
-            fill="none"
-            stroke="rgba(0,0,0,0.25)"
-            strokeWidth="1"
-            style={{
-              fontFamily: "Inter, system-ui, sans-serif",
-              fontSize: "128px",
-              fontWeight: 900,
-              letterSpacing: "-2px",
-            }}
-          >
-            Video Editing
-          </text>
-        </svg>
-      </div>
+        Video Editing
+      </h2>
     </section>
   );
 }
