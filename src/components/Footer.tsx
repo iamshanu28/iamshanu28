@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function Footer() {
   return (
     <footer
@@ -5,26 +7,30 @@ export function Footer() {
       data-section="footer"
     >
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-6">
-        <p className="text-[28px] font-semibold leading-none sm:text-[32px] lg:text-[40px]">
+        <Link
+          to="/"
+          aria-label="Go to home"
+          className="text-[28px] font-semibold leading-none transition-opacity hover:opacity-80 sm:text-[32px] lg:text-[40px]"
+        >
           Portfolio
-        </p>
+        </Link>
 
         <nav
           className="flex items-center gap-6 sm:gap-9"
           aria-label="Footer navigation"
         >
           <a
-            href="#work"
+            href="/#work"
             className="text-[16px] font-light text-ink-muted transition-colors hover:text-black sm:text-[18px] lg:text-[20px]"
           >
             Work
           </a>
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="text-[16px] font-light text-ink-muted transition-colors hover:text-black sm:text-[18px] lg:text-[20px]"
           >
             Contact
-          </a>
+          </Link>
         </nav>
       </div>
 

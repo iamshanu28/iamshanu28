@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const NAV_LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#contact", label: "Contact" },
+type NavLink = {
+  to: string;
+  label: string;
+};
+
+const NAV_LINKS: NavLink[] = [
+  { to: "/#work", label: "Work" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export function Header() {
@@ -23,8 +29,12 @@ export function Header() {
       data-section="header"
     >
       <div className="relative flex items-start justify-between gap-4">
-        <div className="flex items-start gap-2 sm:gap-3">
-          <h1 className="text-[44px] font-semibold leading-none tracking-tight sm:text-[64px] lg:text-[96px]">
+        <Link
+          to="/"
+          aria-label="Go to home"
+          className="flex items-start gap-2 sm:gap-3"
+        >
+          <h1 className="text-[44px] font-semibold leading-none tracking-tight transition-opacity hover:opacity-80 sm:text-[64px] lg:text-[96px]">
             Portfolio
           </h1>
           <span
@@ -33,7 +43,7 @@ export function Header() {
           >
             Editor
           </span>
-        </div>
+        </Link>
 
         {/* Desktop nav */}
         <nav
@@ -41,13 +51,7 @@ export function Header() {
           aria-label="Primary"
         >
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-[18px] font-light text-ink-muted transition-colors hover:text-black lg:text-[20px]"
-            >
-              {link.label}
-            </a>
+            <NavItem key={link.to} link={link} />
           ))}
         </nav>
 
@@ -74,19 +78,42 @@ export function Header() {
       >
         <ul className="mt-4 flex flex-col gap-1 border-t border-black/15 pt-4">
           {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
+            <li key={link.to}>
+              <NavItem
+                link={link}
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-md px-2 py-2 text-[18px] font-light text-ink-muted transition-colors hover:bg-black/5 hover:text-black"
-              >
-                {link.label}
-              </a>
+              />
             </li>
           ))}
         </ul>
       </nav>
     </header>
+  );
+}
+
+type NavItemProps = {
+  link: NavLink;
+  className?: string;
+  onClick?: () => void;
+};
+
+function NavItem({ link, className, onClick }: NavItemProps) {
+  const baseClass =
+    className ??
+    "text-[18px] font-light text-ink-muted transition-colors hover:text-black lg:text-[20px]";
+  const isHashLink = link.to.includes("#");
+  if (isHashLink) {
+    return (
+      <a href={link.to} onClick={onClick} className={baseClass}>
+        {link.label}
+      </a>
+    );
+  }
+  return (
+    <Link to={link.to} onClick={onClick} className={baseClass}>
+      {link.label}
+    </Link>
   );
 }
 
