@@ -1,37 +1,130 @@
+import { useEffect, useState } from "react";
+
+const NAV_LINKS = [
+  { href: "#work", label: "Work" },
+  { href: "#contact", label: "Contact" },
+];
+
 export function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [menuOpen]);
+
   return (
-    <header className="px-[83px] pt-7 pb-7" data-section="header">
-      <div className="relative flex items-start justify-between">
-        <div className="flex items-start gap-3">
-          <h1 className="text-[96px] font-semibold leading-none tracking-tight">
+    <header
+      className="px-6 pt-5 pb-4 sm:px-10 sm:pt-6 sm:pb-6 lg:px-[83px] lg:pt-7 lg:pb-7"
+      data-section="header"
+    >
+      <div className="relative flex items-start justify-between gap-4">
+        <div className="flex items-start gap-2 sm:gap-3">
+          <h1 className="text-[44px] font-semibold leading-none tracking-tight sm:text-[64px] lg:text-[96px]">
             Portfolio
           </h1>
           <span
-            className="mt-[18px] inline-flex items-center rounded-[10px] bg-black px-[10px] py-[2px] text-[12px] font-normal text-white"
+            className="mt-2 inline-flex shrink-0 items-center rounded-[10px] bg-black px-[10px] py-[2px] text-[11px] font-normal text-white sm:mt-3 sm:text-[12px] lg:mt-[18px]"
             aria-label="Role"
           >
             Editor
           </span>
         </div>
 
+        {/* Desktop nav */}
         <nav
-          className="mt-[18px] flex items-center gap-[36px]"
+          className="mt-3 hidden items-center gap-9 sm:mt-4 lg:mt-[18px] lg:flex"
           aria-label="Primary"
         >
-          <a
-            href="#work"
-            className="text-[20px] font-light text-ink-muted transition-colors hover:text-black"
-          >
-            Work
-          </a>
-          <a
-            href="#contact"
-            className="text-[20px] font-light text-ink-muted transition-colors hover:text-black"
-          >
-            Contact
-          </a>
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-[18px] font-light text-ink-muted transition-colors hover:text-black lg:text-[20px]"
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
+
+        {/* Mobile/tablet menu toggle */}
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          className="relative z-30 mt-2 inline-flex h-10 w-10 items-center justify-center rounded-md text-black transition-colors hover:bg-black/5 sm:mt-3 lg:hidden"
+        >
+          {menuOpen ? <CloseIcon /> : <MenuIcon />}
+        </button>
       </div>
+
+      {/* Mobile/tablet drop-down nav */}
+      <nav
+        id="mobile-nav"
+        aria-label="Mobile primary"
+        className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-out lg:hidden ${
+          menuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <ul className="mt-4 flex flex-col gap-1 border-t border-black/15 pt-4">
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="block rounded-md px-2 py-2 text-[18px] font-light text-ink-muted transition-colors hover:bg-black/5 hover:text-black"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="4" y1="7" x2="20" y2="7" />
+      <line x1="4" y1="12" x2="20" y2="12" />
+      <line x1="4" y1="17" x2="20" y2="17" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="6" y1="6" x2="18" y2="18" />
+      <line x1="18" y1="6" x2="6" y2="18" />
+    </svg>
   );
 }

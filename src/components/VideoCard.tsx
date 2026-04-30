@@ -36,7 +36,7 @@ export function VideoCard({ work }: VideoCardProps) {
 
   return (
     <article
-      className="group relative h-[583px] w-[328px] overflow-hidden rounded-[11px] bg-card"
+      className="group relative mx-auto aspect-[328/583] w-full max-w-[328px] overflow-hidden rounded-[11px] bg-card"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       onFocus={handleEnter}
@@ -58,7 +58,6 @@ export function VideoCard({ work }: VideoCardProps) {
           preload="metadata"
           poster={posterFallback}
           autoPlay={false}
-          /* Hide built-in controls — design intent is silent autoplay-on-hover */
           nohotkeys
           style={{
             "--controls": "none",
@@ -68,23 +67,33 @@ export function VideoCard({ work }: VideoCardProps) {
         />
       </div>
 
-      <div className="card-overlay pointer-events-none absolute inset-x-0 bottom-0 h-[222px]" />
+      {/* Decorative overlays — hidden on hover/focus so the video reads cleanly */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 transition-opacity duration-300 ease-out ${
+          hovered ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        <div className="card-overlay absolute inset-x-0 bottom-0 h-[38%]" />
 
-      <div className="absolute right-[37px] top-[27px] text-right text-[96px] font-extrabold leading-none text-white drop-shadow-md">
-        {work.number}
-      </div>
+        <div className="absolute right-5 top-4 text-right text-[64px] font-extrabold leading-none text-white drop-shadow-md sm:right-7 sm:top-5 sm:text-[80px] lg:right-[37px] lg:top-[27px] lg:text-[96px]">
+          {work.number}
+        </div>
 
-      <div className="absolute left-[37px] right-[37px] bottom-[63px] text-white">
-        <p className="text-[16px] font-light leading-none">{work.number}</p>
-        <h3 className="mt-[3px] text-[24px] font-extrabold leading-tight">
-          {work.title}
-        </h3>
-        <p className="mt-[1px] text-[24px] font-extrabold leading-tight">
-          {work.subtitle}
-        </p>
-        <p className="mt-[10px] text-[10px] font-light leading-none">
-          {work.tags.join(" | ")}
-        </p>
+        <div className="absolute bottom-10 left-5 right-5 text-white sm:left-7 sm:right-7 lg:bottom-[63px] lg:left-[37px] lg:right-[37px]">
+          <p className="text-[14px] font-light leading-none sm:text-[16px]">
+            {work.number}
+          </p>
+          <h3 className="mt-[3px] text-[20px] font-extrabold leading-tight sm:text-[22px] lg:text-[24px]">
+            {work.title}
+          </h3>
+          <p className="mt-[1px] text-[20px] font-extrabold leading-tight sm:text-[22px] lg:text-[24px]">
+            {work.subtitle}
+          </p>
+          <p className="mt-[10px] text-[10px] font-light leading-none">
+            {work.tags.join(" | ")}
+          </p>
+        </div>
       </div>
     </article>
   );
