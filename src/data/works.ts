@@ -28,18 +28,18 @@ export const works: Work[] = [
   {
     id: "03",
     number: "03",
-    title: "Educational",
+    title: "Medical",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: "1ieTV7GHN3DWo00saj6LKDzUaKZUn01P8upynkDIggWG8",
+    muxPlaybackId: "6ZhinY4M89jaGnzse028n5Wj8QZye00uUVQkdB6uH34zw",
   },
   {
     id: "04",
     number: "04",
-    title: "Educational",
+    title: "Informational",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: "G5dbeET901m98qfwiA2gKdkDRptWZ00BDbCG01IKLp2BPU",
+    muxPlaybackId: "1ieTV7GHN3DWo00saj6LKDzUaKZUn01P8upynkDIggWG8",
   },
   {
     id: "05",
@@ -52,9 +52,9 @@ export const works: Work[] = [
   {
     id: "06",
     number: "06",
-    title: "Medical",
+    title: "Informational",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: "Ee15D017LgFTFnfhmC1XfAHZW3hBIRm1U901u2wQXgCQ8",
+    muxPlaybackId: "G5dbeET901m98qfwiA2gKdkDRptWZ00BDbCG01IKLp2BPU",
   },
 ];
