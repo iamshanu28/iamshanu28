@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { HashLink } from "./HashLink";
 
 export function Footer() {
+  const navLinkClass =
+    "text-[16px] font-light text-ink-muted transition-colors hover:text-black sm:text-[18px] lg:text-[20px]";
+
   return (
     <footer
       className="border-t border-black/15 px-6 pb-8 pt-6 sm:px-10 sm:pt-7 lg:px-[83px] lg:pb-[40px] lg:pt-[28px]"
@@ -19,18 +23,12 @@ export function Footer() {
           className="flex items-center gap-6 sm:gap-9"
           aria-label="Footer navigation"
         >
-          <a
-            href="/#work"
-            className="text-[16px] font-light text-ink-muted transition-colors hover:text-black sm:text-[18px] lg:text-[20px]"
-          >
+          <HashLink to="/#work" className={navLinkClass}>
             Work
-          </a>
-          <Link
-            to="/contact"
-            className="text-[16px] font-light text-ink-muted transition-colors hover:text-black sm:text-[18px] lg:text-[20px]"
-          >
+          </HashLink>
+          <HashLink to="/contact" className={navLinkClass}>
             Contact
-          </Link>
+          </HashLink>
         </nav>
       </div>
 

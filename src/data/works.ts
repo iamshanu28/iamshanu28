@@ -12,7 +12,7 @@ export const works: Work[] = [
   {
     id: "01",
     number: "01",
-    title: "Doctor",
+    title: "Medical",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
     muxPlaybackId: "xdxRm5cuUWQYgM01sgesNUIlIGJ700rNyJQCHKZeFWjP8",
@@ -20,7 +20,7 @@ export const works: Work[] = [
   {
     id: "02",
     number: "02",
-    title: "Doctor",
+    title: "Real Estate",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
     muxPlaybackId: "FVAoVC6GpZm6Nf01g3tOkDM402d00FctTUKDHm2w67rUmk",
@@ -28,7 +28,7 @@ export const works: Work[] = [
   {
     id: "03",
     number: "03",
-    title: "Doctor",
+    title: "Educational",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
     muxPlaybackId: "1ieTV7GHN3DWo00saj6LKDzUaKZUn01P8upynkDIggWG8",
@@ -36,7 +36,7 @@ export const works: Work[] = [
   {
     id: "04",
     number: "04",
-    title: "Doctor",
+    title: "Educational",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
     muxPlaybackId: "G5dbeET901m98qfwiA2gKdkDRptWZ00BDbCG01IKLp2BPU",
@@ -44,7 +44,7 @@ export const works: Work[] = [
   {
     id: "05",
     number: "05",
-    title: "Doctor",
+    title: "Podcast",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
     muxPlaybackId: "HniFH026FZcaFAAULLsQbKgfK487FIpct7ACwZ3acwm8",
@@ -52,7 +52,7 @@ export const works: Work[] = [
   {
     id: "06",
     number: "06",
-    title: "Doctor",
+    title: "Medical",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
     muxPlaybackId: "Ee15D017LgFTFnfhmC1XfAHZW3hBIRm1U901u2wQXgCQ8",

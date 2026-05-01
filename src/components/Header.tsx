@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { HashLink } from "./HashLink";
 
 type NavLink = {
   to: string;
@@ -102,18 +103,10 @@ function NavItem({ link, className, onClick }: NavItemProps) {
   const baseClass =
     className ??
     "text-[18px] font-light text-ink-muted transition-colors hover:text-black lg:text-[20px]";
-  const isHashLink = link.to.includes("#");
-  if (isHashLink) {
-    return (
-      <a href={link.to} onClick={onClick} className={baseClass}>
-        {link.label}
-      </a>
-    );
-  }
   return (
-    <Link to={link.to} onClick={onClick} className={baseClass}>
+    <HashLink to={link.to} onClick={onClick} className={baseClass}>
       {link.label}
-    </Link>
+    </HashLink>
   );
 }
 
