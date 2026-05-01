@@ -70,7 +70,3 @@ export const works: Work[] = [
 ## Fonts
 
 Inter and Intel One Mono are loaded from Google Fonts in `index.html`. The body falls back to system sans / mono when those fonts haven't loaded yet.
-
-## License
-
-Private — all rights reserved.
