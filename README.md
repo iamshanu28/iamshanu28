@@ -73,21 +73,42 @@ Inter and Intel One Mono are loaded from Google Fonts in `index.html`. The body 
 
 ## Deployment — GitHub Pages
 
-The site is configured for **GitHub Pages** at `https://iamshanu28.github.io/portfolio/`.
+The site is configured for **GitHub Pages** at `https://iamshanu28.github.io/iamshanu28/`.
+
+> The path segment after the username (`/iamshanu28/`) must match the **repo name** on GitHub. If you rename the repo, update `BASE` in `vite.config.ts` to match — otherwise asset URLs will 404 and the page will render blank.
 
 Three pieces work together:
 
-1. `vite.config.ts` sets `base: "/portfolio/"` so all built asset URLs are prefixed
+1. `vite.config.ts` sets `base: "/iamshanu28/"` so all built asset URLs are prefixed
 2. `src/App.tsx` reads `import.meta.env.BASE_URL` and passes it to `<BrowserRouter basename={...}>` so client-side routes (`/`, `/contact`) resolve under the subpath
 3. `scripts/postbuild.mjs` copies `dist/index.html` → `dist/404.html` (so direct hits to `/portfolio/contact` fall back to the SPA shell instead of GitHub's 404 page) and creates an empty `dist/.nojekyll` (so Pages serves files starting with `_`)
 
-### Deploy
+### Deploy (automated — recommended)
+
+A GitHub Actions workflow at `.github/workflows/deploy.yml` runs on every push to `main` and publishes `dist/` to GitHub Pages.
+
+One-time setup:
+
+1. Push this repo to GitHub (default branch: `main`).
+2. In the repo: **Settings → Pages → Build and deployment → Source → "GitHub Actions"**.
+3. Push to `main` (or run **Actions → Deploy to GitHub Pages → Run workflow** manually).
+4. Watch the workflow under the **Actions** tab; once it's green, the site is live at the URL above.
+
+The workflow does:
+- `npm ci` (install deps with the lockfile)
+- `npm run lint` (type-check)
+- `npm run build` (which also runs `postbuild` for `404.html` + `.nojekyll`)
+- Upload the `dist/` folder as a Pages artifact and deploy it via `actions/deploy-pages@v4`
+
+### Deploy (manual fallback)
+
+If you ever need to publish without pushing to `main`:
 
 ```bash
 npm run deploy
 ```
 
-This runs `npm run build` (which triggers `postbuild`) and then publishes `dist/` to the `gh-pages` branch via the `gh-pages` package. Make sure your repo's Pages source is set to **Deploy from a branch → `gh-pages` → `/ (root)`** in repo settings.
+This runs `npm run build` (triggering `postbuild`) and pushes `dist/` to a `gh-pages` branch via the `gh-pages` package. To use this path, switch **Settings → Pages → Source** back to **Deploy from a branch → `gh-pages` → `/ (root)`**. Pick one mode (Actions or branch deploy) and stick with it — they fight each other if both are enabled.
 
 ### Local preview at the production base path
 

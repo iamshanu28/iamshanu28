@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Hosted at https://iamshanu28.github.io/portfolio/
+// Hosted at https://iamshanu28.github.io/iamshanu28/ (GitHub Pages project
+// site — the path segment must match the GitHub repo name).
 const BASE = "/iamshanu28/";
 const ALLOWED_HOSTS = ["iamshanu28.github.io", "localhost", "127.0.0.1"];
 
