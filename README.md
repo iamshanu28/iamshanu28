@@ -63,10 +63,39 @@ export const works: Work[] = [
 
 ### Notes
 
-- The placeholder uses Mux's public demo asset so the site renders out of the box. Swap in real assets before shipping.
-- Cards autoplay muted on hover/focus and reset on leave — no built-in player controls are shown (design intent).
+- All six cards autoplay muted in a loop on page load. Hovering a card unmutes that one (others stay muted). Leaving the card re-mutes it.
+- No built-in player controls are shown (design intent — silent ambient looping).
 - If you want letterboxed 16:9 instead of cropped portrait, change the `.mux-cover` rule in `src/index.css` to use `--media-object-fit: contain;`.
 
 ## Fonts
 
 Inter and Intel One Mono are loaded from Google Fonts in `index.html`. The body falls back to system sans / mono when those fonts haven't loaded yet.
+
+## Deployment — GitHub Pages
+
+The site is configured for **GitHub Pages** at `https://iamshanu28.github.io/portfolio/`.
+
+Three pieces work together:
+
+1. `vite.config.ts` sets `base: "/portfolio/"` so all built asset URLs are prefixed
+2. `src/App.tsx` reads `import.meta.env.BASE_URL` and passes it to `<BrowserRouter basename={...}>` so client-side routes (`/`, `/contact`) resolve under the subpath
+3. `scripts/postbuild.mjs` copies `dist/index.html` → `dist/404.html` (so direct hits to `/portfolio/contact` fall back to the SPA shell instead of GitHub's 404 page) and creates an empty `dist/.nojekyll` (so Pages serves files starting with `_`)
+
+### Deploy
+
+```bash
+npm run deploy
+```
+
+This runs `npm run build` (which triggers `postbuild`) and then publishes `dist/` to the `gh-pages` branch via the `gh-pages` package. Make sure your repo's Pages source is set to **Deploy from a branch → `gh-pages` → `/ (root)`** in repo settings.
+
+### Local preview at the production base path
+
+```bash
+npm run build && npm run preview
+# → http://localhost:4173/portfolio/
+```
+
+### Allowed hosts
+
+`vite.config.ts` whitelists `iamshanu28.github.io` for both `server.allowedHosts` and `preview.allowedHosts` — useful if you tunnel the dev server (e.g. via ngrok) behind that domain. Production GitHub Pages serves the static `dist/` files and doesn't go through Vite, so this only affects dev/preview.
