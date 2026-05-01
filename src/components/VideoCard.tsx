@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MuxPlayer from "@mux/mux-player-react";
 import type { Work } from "../data/works";
 import posterFallback from "../assets/poster-fallback.jpg";
@@ -9,40 +9,41 @@ type VideoCardProps = {
 
 /**
  * Portrait video card matching the Figma design (328x583).
- * The Mux Player renders the underlying 16:9 source with object-fit: cover so
- * the source video fills the portrait crop, mirroring the design composition.
- * Hovering plays the video; leaving pauses and resets to poster.
+ *
+ * Behavior:
+ * - All cards autoplay muted in a loop on page load (browsers require muted
+ *   for autoplay without user gesture).
+ * - On hover/focus, the card under the cursor unmutes; on leave/blur it mutes
+ *   again. Only one card can be unmuted at a time because hover is exclusive.
+ * - The Mux Player renders the underlying 16:9 source with object-fit: cover
+ *   so the source fills the portrait crop, mirroring the design composition.
  */
 export function VideoCard({ work }: VideoCardProps) {
   const playerRef = useRef<HTMLElement | null>(null);
   const [hovered, setHovered] = useState(false);
 
-  const handleEnter = () => {
-    setHovered(true);
+  // Reactively reflect `hovered` onto the underlying media element's `muted`
+  // property. Setting it via the imperative API (rather than only as a JSX
+  // attribute) is what unmutes already-playing video in all browsers.
+  useEffect(() => {
     const el = playerRef.current as unknown as HTMLMediaElement | null;
-    if (el && typeof el.play === "function") {
+    if (!el) return;
+    el.muted = !hovered;
+    if (hovered && typeof el.play === "function") {
+      // Some browsers pause-on-unmute if autoplay was suspended; nudge it.
       void el.play().catch(() => {});
     }
-  };
-
-  const handleLeave = () => {
-    setHovered(false);
-    const el = playerRef.current as unknown as HTMLMediaElement | null;
-    if (el && typeof el.pause === "function") {
-      el.pause();
-      el.currentTime = 0;
-    }
-  };
+  }, [hovered]);
 
   return (
     <article
       className="group relative mx-auto aspect-[328/583] w-full max-w-[328px] overflow-hidden rounded-[11px] bg-card"
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      onFocus={handleEnter}
-      onBlur={handleLeave}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
       tabIndex={0}
-      aria-label={`${work.title} ${work.subtitle}, work ${work.number}`}
+      aria-label={`${work.title} ${work.subtitle}, work ${work.number}. Hover to unmute.`}
     >
       <div className="absolute inset-0">
         <MuxPlayer
@@ -52,11 +53,12 @@ export function VideoCard({ work }: VideoCardProps) {
           className="mux-cover"
           playbackId={work.muxPlaybackId}
           streamType="on-demand"
+          autoPlay
           loop
+          muted
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={posterFallback}
-          autoPlay={true}
           nohotkeys
           style={{
             "--controls": "none",

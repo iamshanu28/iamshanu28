@@ -4,15 +4,9 @@ export type Work = {
   title: string;
   subtitle: string;
   tags: string[];
-  /**
-   * Mux playback ID for the 16:9 source video.
-   * Replace these with your own Mux playback IDs from https://dashboard.mux.com.
-   * The placeholder below is Mux's public demo asset and is safe to use while developing.
-   */
+  /** Mux playback ID for the 16:9 source video (from https://dashboard.mux.com). */
   muxPlaybackId: string;
 };
-
-const DEMO_PLAYBACK_ID = "Ee15D017LgFTFnfhmC1XfAHZW3hBIRm1U901u2wQXgCQ8";
 
 export const works: Work[] = [
   {

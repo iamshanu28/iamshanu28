@@ -46,13 +46,6 @@ export function Hero() {
           smooth transitions, and strong visual impact.{" "}
           <span aria-hidden="true">🎬✨</span>
         </p>
-
-        <a
-          href="#about"
-          className="mt-5 inline-flex items-center justify-center rounded-[10px] px-[10px] py-[2px] text-[16px] font-light text-black transition-colors hover:bg-black/5 lg:mt-[26px]"
-        >
-          About
-        </a>
       </div>
     </section>
   );
