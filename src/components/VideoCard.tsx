@@ -52,12 +52,11 @@ export function VideoCard({ work }: VideoCardProps) {
           className="mux-cover"
           playbackId={work.muxPlaybackId}
           streamType="on-demand"
-          muted
           loop
           playsInline
           preload="metadata"
           poster={posterFallback}
-          autoPlay={false}
+          autoPlay={true}
           nohotkeys
           style={{
             "--controls": "none",

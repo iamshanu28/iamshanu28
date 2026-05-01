@@ -12,7 +12,7 @@ export type Work = {
   muxPlaybackId: string;
 };
 
-const DEMO_PLAYBACK_ID = "DS00Spx1CV902MCtPj5WknGlR102V5HFkDe";
+const DEMO_PLAYBACK_ID = "Ee15D017LgFTFnfhmC1XfAHZW3hBIRm1U901u2wQXgCQ8";
 
 export const works: Work[] = [
   {
@@ -21,7 +21,7 @@ export const works: Work[] = [
     title: "Doctor",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: DEMO_PLAYBACK_ID,
+    muxPlaybackId: "xdxRm5cuUWQYgM01sgesNUIlIGJ700rNyJQCHKZeFWjP8",
   },
   {
     id: "02",
@@ -29,7 +29,7 @@ export const works: Work[] = [
     title: "Doctor",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: DEMO_PLAYBACK_ID,
+    muxPlaybackId: "FVAoVC6GpZm6Nf01g3tOkDM402d00FctTUKDHm2w67rUmk",
   },
   {
     id: "03",
@@ -37,7 +37,7 @@ export const works: Work[] = [
     title: "Doctor",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: DEMO_PLAYBACK_ID,
+    muxPlaybackId: "1ieTV7GHN3DWo00saj6LKDzUaKZUn01P8upynkDIggWG8",
   },
   {
     id: "04",
@@ -45,7 +45,7 @@ export const works: Work[] = [
     title: "Doctor",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: DEMO_PLAYBACK_ID,
+    muxPlaybackId: "G5dbeET901m98qfwiA2gKdkDRptWZ00BDbCG01IKLp2BPU",
   },
   {
     id: "05",
@@ -53,7 +53,7 @@ export const works: Work[] = [
     title: "Doctor",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: DEMO_PLAYBACK_ID,
+    muxPlaybackId: "HniFH026FZcaFAAULLsQbKgfK487FIpct7ACwZ3acwm8",
   },
   {
     id: "06",
@@ -61,6 +61,6 @@ export const works: Work[] = [
     title: "Doctor",
     subtitle: "Reel 2026",
     tags: ["Motion Design", "Color Grading", "Sound Design"],
-    muxPlaybackId: DEMO_PLAYBACK_ID,
+    muxPlaybackId: "Ee15D017LgFTFnfhmC1XfAHZW3hBIRm1U901u2wQXgCQ8",
   },
 ];
