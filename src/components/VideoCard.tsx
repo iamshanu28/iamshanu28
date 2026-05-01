@@ -13,8 +13,9 @@ type VideoCardProps = {
  * Behavior:
  * - All cards autoplay muted in a loop on page load (browsers require muted
  *   for autoplay without user gesture).
- * - On hover/focus, the card under the cursor unmutes; on leave/blur it mutes
- *   again. Only one card can be unmuted at a time because hover is exclusive.
+ * - On hover/focus, the card restarts the video from 00:00, unmutes, and
+ *   plays. Only one card can be unmuted at a time because hover is exclusive.
+ * - On leave/blur, the card re-mutes but keeps looping silently.
  * - The Mux Player renders the underlying 16:9 source with object-fit: cover
  *   so the source fills the portrait crop, mirroring the design composition.
  */
@@ -22,16 +23,25 @@ export function VideoCard({ work }: VideoCardProps) {
   const playerRef = useRef<HTMLElement | null>(null);
   const [hovered, setHovered] = useState(false);
 
-  // Reactively reflect `hovered` onto the underlying media element's `muted`
-  // property. Setting it via the imperative API (rather than only as a JSX
-  // attribute) is what unmutes already-playing video in all browsers.
+  // Drive the underlying media element imperatively. JSX-only changes don't
+  // unmute already-playing video reliably across browsers, and we also need to
+  // seek to 0 on each hover entry.
   useEffect(() => {
     const el = playerRef.current as unknown as HTMLMediaElement | null;
     if (!el) return;
-    el.muted = !hovered;
-    if (hovered && typeof el.play === "function") {
-      // Some browsers pause-on-unmute if autoplay was suspended; nudge it.
-      void el.play().catch(() => {});
+
+    if (hovered) {
+      try {
+        el.currentTime = 0;
+      } catch {
+        // Some browsers throw if the source isn't seekable yet — safe to ignore.
+      }
+      el.muted = false;
+      if (typeof el.play === "function") {
+        void el.play().catch(() => {});
+      }
+    } else {
+      el.muted = true;
     }
   }, [hovered]);
 
